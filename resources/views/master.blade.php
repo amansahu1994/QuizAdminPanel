@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+<meta charset="utf-8">
     <meta charset="ISO-8859-1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="HanuSir Admin Panel">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="HanuSir Admin Panel">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Admin Dashboard</title>
-	<base href="{{URL::asset('/')}}" target="_blank">
-	<link rel="stylesheet" href="{{url(('vendors/bootstrap/dist/css/bootstrap.min.css'))}}">
+<title>Admin Dashboard</title>
+<base href="{{URL::asset('/')}}" target="_blank">
+<link rel="stylesheet" href="{{url(('vendors/bootstrap/dist/css/bootstrap.min.css'))}}">
     <link rel="stylesheet" href="{{url(('vendors/font-awesome/css/font-awesome.min.css'))}}">
     <link rel="stylesheet" href="{{url(('vendors/themify-icons/css/themify-icons.css'))}}">
     <link rel="stylesheet" href="{{url(('vendors/flag-icon-css/css/flag-icon.min.css'))}}">
@@ -21,7 +21,24 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-	<script src="{{url(('js/jquery.js'))}}" type="text/javascript" charset="utf-8" async defer></script>
+<script src="{{url(('js/jquery.js'))}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{url(('vendors/jquery/dist/jquery.min.js'))}}"></script>
+<script src="{{url(('vendors/popper.js/dist/umd/popper.min.js'))}}"></script>
+<script type="text/javascript" src="{{url(('vendors/bootstrap/dist/js/bootstrap.min.js'))}}"></script>
+<script src="{{url(('assets/js/main.js'))}}"></script>
+<script src="{{url(('vendors/datatables.net/js/jquery.dataTables.min.js'))}}"></script>
+<script src="{{url(('vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js'))}}"></script>
+<script src="{{url(('vendors/datatables.net-buttons/js/dataTables.buttons.min.js'))}}"></script>
+<script src="{{url(('vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'))}}"></script>
+<!-- <script src="{{url(('vendors/jszip/dist/jszip.min.js'))}}"></script>
+<script src="{{url(('vendors/pdfmake/build/pdfmake.min.js'))}}"></script>
+<script src="{{url(('vendors/pdfmake/build/vfs_fonts.js'))}}"></script> -->
+<script src="{{url(('vendors/datatables.net-buttons/js/buttons.html5.min.js'))}}"></script>
+<script src="{{url(('vendors/datatables.net-buttons/js/buttons.print.min.js'))}}"></script>
+<script src="{{url(('vendors/datatables.net-buttons/js/buttons.colVis.min.js'))}}"></script>
+<script src="{{url(('assets/js/init-scripts/data-table/datatables-init.js'))}}"></script>
+@yield('jquery')
+
     <style type="text/css" media="screen">
             @media (min-width: 768px) {
               .modal-xl {
@@ -37,7 +54,7 @@
     </style>
 </head>
 <body>
-	<!-- Left Panel -->
+<!-- Left Panel -->
 
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -165,7 +182,7 @@
             @yield('viewSubject')
             @yield('viewChapter')
             @yield('viewQuestion')
-						@yield('viewTestQuestions')
+@yield('viewTestQuestions')
 
 
 
@@ -189,22 +206,8 @@
 
 
 <!-- Script Files -->
-	<script src="{{url(('vendors/jquery/dist/jquery.min.js'))}}"></script>
-    <script src="{{url(('vendors/popper.js/dist/umd/popper.min.js'))}}"></script>
-    <script src="{{url(('vendors/bootstrap/dist/js/bootstrap.min.js'))}}"></script>
-    <script src="{{url(('assets/js/main.js'))}}"></script>
-    <script src="{{url(('vendors/datatables.net/js/jquery.dataTables.min.js'))}}"></script>
-    <script src="{{url(('vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js'))}}"></script>
-    <script src="{{url(('vendors/datatables.net-buttons/js/dataTables.buttons.min.js'))}}"></script>
-    <script src="{{url(('vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'))}}"></script>
-    <!-- <script src="{{url(('vendors/jszip/dist/jszip.min.js'))}}"></script>
-    <script src="{{url(('vendors/pdfmake/build/pdfmake.min.js'))}}"></script>
-    <script src="{{url(('vendors/pdfmake/build/vfs_fonts.js'))}}"></script> -->
-    <script src="{{url(('vendors/datatables.net-buttons/js/buttons.html5.min.js'))}}"></script>
-    <script src="{{url(('vendors/datatables.net-buttons/js/buttons.print.min.js'))}}"></script>
-    <script src="{{url(('vendors/datatables.net-buttons/js/buttons.colVis.min.js'))}}"></script>
-    <script src="{{url(('assets/js/init-scripts/data-table/datatables-init.js'))}}"></script>
-    @yield('jquery')
+
+
 
     <!-- <script src="{{url(('vendors/chart.js/dist/Chart.bundle.min.js'))}}"></script>
     <script src="{{url(('assets/js/dashboard.js'))}}"></script>
