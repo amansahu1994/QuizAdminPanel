@@ -92,7 +92,7 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Manage Test Questions</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="/viewQuestions" target="_self">View All Test Questions</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="/viewTestQuestions" target="_self">View All Test Questions</a></li>
                         </ul>
                     </li>
                 </ul>

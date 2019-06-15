@@ -8,14 +8,14 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li class="active">View Questions</li>
+                            <li class="active">View Test Questions</li>
                         </ol>
                     </div>
                 </div>
             </div>
 @endsection
 
-@section('viewQuestion')
+@section('viewTestQuestions')
 			<div class="animated fadeIn">
                 <div class="row">
 
@@ -44,12 +44,12 @@
                                             <th>Answer</th>
                                             <th>Subject</th>
                                             <th>Chapter</th>
-                                            <th>Sheet</th>
+                                            <th>Test</th>
                                             <th>Update/Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                         @foreach($questions as $question)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
@@ -61,21 +61,21 @@
                                             <td>{{$question->answer}}</td>
                                             <td>{{$question->subject_name}}</td>
                                             <td>{{$question->chapter_name}}</td>
-                                            <td>{{$question->sheet}}</td>
+                                            <td>{{$question->test}}</td>
                                             <td>
-                                                <button type="button" id="{{$question->q_id}}" class="btn  btn-warning edit"data-toggle="modal" href="">
+                                                <button type="button" id="{{$question->test_qid}}" class="btn  btn-warning edit"data-toggle="modal" href="">
                                                     <i class="fa fa-edit"></i>
                                                     Edit
                                                 </button>
                                                 <button type="button" class="btn btn-danger delete"
-                                                id="{{$question->q_id}}">
+                                                id="{{$question->test_qid}}">
                                                     <i class="fa fa-trash-o "></i>
                                                     Delete
                                                 </button>
                                             </td>
                                         </tr>
                                         @endforeach
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -108,7 +108,7 @@
                             <small class="form-text text-muted"></small>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-6">                            
+                            <div class="col-md-6">
                                 <label class=" form-control-label">Option 1</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -129,7 +129,7 @@
                                 <small class="form-text text-muted"></small>
                             </div>
 
-                            <div class="col-md-6">                            
+                            <div class="col-md-6">
                                 <label class=" form-control-label">Option 3</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -179,15 +179,15 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class=" form-control-label">Select Sheet</label>
+                                <label class=" form-control-label">Select Test</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
-                                    <select class="form-control" id="selectSheet1">
-                                        <option value="Sheet-1">Sheet-1</option>
-                                        <option value="Sheet-2">Sheet-2</option>
-                                        <option value="Sheet-3">Sheet-3</option>
-                                        <option value="Sheet-4">Sheet-4</option>
-                                        <option value="Sheet-5">Sheet-5</option>
+                                    <select class="form-control" id="selectTest1">
+                                        <option value="Test-1">Test-1</option>
+                                        <option value="Test-2">Test-2</option>
+                                        <option value="Test-3">Test-3</option>
+                                        <option value="Test-4">Test-4</option>
+                                        <option value="Test-5">Test-5</option>
                                     </select>
                                 </div>
                                 <small class="form-text text-muted"></small>
@@ -236,7 +236,7 @@
                             <small class="form-text text-muted"></small>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-6">                            
+                            <div class="col-md-6">
                                 <label class=" form-control-label">Option 1</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -257,7 +257,7 @@
                                 <small class="form-text text-muted"></small>
                             </div>
 
-                            <div class="col-md-6">                            
+                            <div class="col-md-6">
                                 <label class=" form-control-label">Option 3</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -307,15 +307,15 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class=" form-control-label">Select Sheet</label>
+                                <label class=" form-control-label">Select Test</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
-                                    <select class="form-control" id="selectSheet2">
-                                        <option value="Sheet-1">Sheet-1</option>
-                                        <option value="Sheet-2">Sheet-2</option>
-                                        <option value="Sheet-3">Sheet-3</option>
-                                        <option value="Sheet-4">Sheet-4</option>
-                                        <option value="Sheet-5">Sheet-5</option>
+                                    <select class="form-control" id="selectTest2">
+                                        <option value="Test-1">Test-1</option>
+                                        <option value="Test-2">Test-2</option>
+                                        <option value="Test-3">Test-3</option>
+                                        <option value="Test-4">Test-4</option>
+                                        <option value="Test-5">Test-5</option>
                                     </select>
                                 </div>
                                 <small class="form-text text-muted"></small>
@@ -340,14 +340,14 @@
 </div>
 <!--Edit Chapter Modal End -->
 @endsection
-	
-            
-        
+
+
+
 
 
 @section('jquery')
-    
-	
+
+
     <script type="text/javascript">
         // $('#addQuestion').on('click', function() {
         //     $('#addQuestionModal').modal('show');
@@ -363,7 +363,7 @@
             var ans='';
             var sub_id=0;
             var chapter_id=0;
-            var sheet='';
+            var test='';
             $('#selectSubject1').on('click',function() {
                 window.sub_id = this.value;
                 //console.log(this.value);
@@ -372,11 +372,11 @@
                 window.chapter_id = this.value;
                 //console.log(this.value);
             });
-            $('#selectSheet1').on('click',function() {
-                window.sheet = this.value;
+            $('#selectTest1').on('click',function() {
+                window.test = this.value;
                 //console.log(this.value);
             });
-            
+
             $('#O1').on('click',function() {
                 window.ans = $('#Option1').val();
             });
@@ -397,12 +397,12 @@
                 window.option2 = $('#Option2').val();
                 window.option3 = $('#Option3').val();
                 window.option4 = $('#Option4').val();
-                //console.log(window.sub_id+'-'+window.chapter_id+'-'+window.sheet);
+                //console.log(window.sub_id+'-'+window.chapter_id+'-'+window.test);
                 //console.log(window.question+'-'+window.option1+'-'+window.option2+'-'+window.option3+'-'+window.option4+window.ans);
                 $.ajax({
-                    url: 'addQuestion',
+                    url: 'addTestQuestion',
                     type: 'POST',
-                    data: { 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'sheet' : window.sheet},
+                    data: { 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'test' : window.test},
                     dataType: 'JSON',
                     success : function(data) {
                         console.log(data);
@@ -418,7 +418,7 @@
                         }
                         else if(data.result === 'error')
                         {
-                            
+
                             $('#closeAddQuestionModal').click();
                         }
                     }
@@ -426,11 +426,11 @@
             });
 
         }
-        
+
         $(document).on('click','.edit', function(){
             var q_id = $(this).attr("id");
             $.ajax({
-                url: 'getQuestion',
+                url: 'getTestQuestion',
                 type: 'GET',
                 data: {'q_id': q_id},
                 dataType: 'JSON',
@@ -453,9 +453,9 @@
                     var ans='';
                     var sub_id=0;
                     var chapter_id=0;
-                    var sheet='';
-                    
-                    
+                    var test='';
+
+
                     $('#O11').on('click',function() {
                         window.ans = $('#Opt1').val();
                     });
@@ -477,8 +477,8 @@
                             window.chapter_id = this.value;
                             //console.log(this.value);
                         });
-                        $('#selectSheet2').on('click',function() {
-                            window.sheet = this.value;
+                        $('#selectTest2').on('click',function() {
+                            window.test = this.value;
                             //console.log(this.value);
                         });
 
@@ -491,14 +491,14 @@
                         window.option3 = $('#Opt3').val();
                         window.option4 = $('#Opt4').val();
 
-                        
 
-                        console.log(q_id1+'-'+window.sub_id+'-'+window.chapter_id+'-'+window.sheet);
+
+                        console.log(q_id1+'-'+window.sub_id+'-'+window.chapter_id+'-'+window.test);
                         console.log(window.question+'-'+window.option1+'-'+window.option2+'-'+window.option3+'-'+window.option4+window.ans);
                         $.ajax({
-                            url: 'updateQuestion',
+                            url: 'updateTestQuestion',
                             type: 'POST',
-                            data: { 'q_id' : q_id1, 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'sheet' : window.sheet},
+                            data: { 'q_id' : q_id1, 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'test' : window.test},
                             dataType: 'JSON',
                             success : function(data) {
                                 console.log(data);
@@ -515,27 +515,27 @@
                                 }
                                 else if(data.result === 'error')
                                 {
-                                    
+
                                     $('#closeEditQuestionModal').click();
                                 }
                             }
                         })
                 })
-            } 
+            }
         })
     })
 
 
-            
+
         $(document).on('click','.delete', function(){
-            
+
             var confirmation = confirm('Are you sure !');
             if(confirmation == true){
 
                 var q_id = $(this).attr("id");
 
                 $.ajax({
-                    url: 'deleteQuestion',
+                    url: 'deleteTestQuestion',
                     type: 'POST',
                     data: {'q_id': q_id},
                     dataType: 'JSON',
@@ -558,5 +558,5 @@
                 });
             }
         });
-    </script> 
+    </script>
 @endsection
