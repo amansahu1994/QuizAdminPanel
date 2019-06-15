@@ -44,7 +44,23 @@
                                         </tr>
                                     </thead>
                                     <tbody id="listSubjects">
-
+																			@foreach($subjects as $subject)
+																				<tr>
+																					<td>{{$loop->iteration}}</td>
+																					<td>{{$subject->subject_name}}</td>
+																					<td>
+																						<button type="button" id="{{$subject->sub_id}}" class="btn btn-warning edit" data-toggle="modal" href="">
+													        						<i class="fa fa-edit"></i>
+                                            		Edit
+                                          	</button>
+																						<button type="button" class="btn btn-danger delete"
+																							id="{{$subject->sub_id}}">
+																								<i class="fa fa-trash-o "></i>
+																								Delete
+																						</button>
+																					</td>
+																				</tr>
+																			@endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -173,6 +189,7 @@
 		        					+'</td>'
 		        					'</td></tr>'
 		        	})
+							$('#listSubjects').empty();
 		        	$('#listSubjects').append(trBody);
 		        }
     		});
@@ -208,7 +225,30 @@
 		        		$("#editSubjectInputId").val('')
 		        		$('#closeEditSubjectModal').click()
 		        		alert('Updated Successfully.');
-		        		document.location.reload(true);
+		        		/*----------*/
+								var trBody = ''
+								$.each(data.data,function(index,item){
+									console.log('data.data')
+									console.log(data.data)
+									trBody = trBody + '<tr><td>'+(index+1)
+												+'<td>'+item.subject_name+'</td>'
+												+'<td>'+
+												`<button type="button" id="`+item.sub_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+													<i class="fa fa-edit"></i>
+																									Edit
+																								</button>
+										<button type="button" class="btn btn-danger delete"
+													id="`+item.sub_id+`">
+														<i class="fa fa-trash-o "></i>
+														Delete
+													</button>
+												`
+												+'</td>'
+												'</td></tr>'
+								})
+								$('#listSubjects').empty();
+								$('#listSubjects').append(trBody);
+								/*----------*/
 		        	}
 		        	else if(data.result === 'error')
 		        	{
@@ -237,12 +277,33 @@
 							// 	$this.remove();
 							// });
 			        		alert('Subject Deleted Successfully.');
-			        		document.location.reload(true);
-			        		//location.reload();
+									/*----------*/
+									var trBody = ''
+									$.each(data.data,function(index,item){
+										trBody = trBody + '<tr><td>'+(index+1)
+													+'<td>'+item.subject_name+'</td>'
+													+'<td>'+
+													`<button type="button" id="`+item.sub_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+														<i class="fa fa-edit"></i>
+																										Edit
+																									</button>
+											<button type="button" class="btn btn-danger delete"
+														id="`+item.sub_id+`">
+															<i class="fa fa-trash-o "></i>
+															Delete
+														</button>
+													`
+													+'</td>'
+													'</td></tr>'
+									})
+									$('#listSubjects').empty();
+									$('#listSubjects').append(trBody);
+									/*----------*/
 
 			        	}
 			        	else if(data.result === 'error')
 			        	{
+
 			        		alert('Subject Not Deleted, Please try again.');
 			        	}
 	    			}
@@ -266,7 +327,28 @@
 		        	{
 		        		$("#addSubjectinputId").val('')
 		        		$('#closeAddSubjectModal').click()
-		        		document.location.reload(true);
+								/*----------*/
+								var trBody = ''
+								$.each(data.data,function(index,item){
+									trBody = trBody + '<tr><td>'+(index+1)
+												+'<td>'+item.subject_name+'</td>'
+												+'<td>'+
+												`<button type="button" id="`+item.sub_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+													<i class="fa fa-edit"></i>
+																									Edit
+																								</button>
+										<button type="button" class="btn btn-danger delete"
+													id="`+item.sub_id+`">
+														<i class="fa fa-trash-o "></i>
+														Delete
+													</button>
+												`
+												+'</td>'
+												'</td></tr>'
+								})
+								$('#listSubjects').empty();
+								$('#listSubjects').append(trBody);
+								/*----------*/
 		        	}
 		        	else if(data.result === 'error')
 		        	{

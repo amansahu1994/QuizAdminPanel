@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
+use View;
 
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class SubjectsController extends Controller
     //
     public function viewSubjects(Request $request)
     {
-      return view('viewSubject');
+      $getAllSubjects = DB::table('subject')->get();
+      return View::make('viewSubject')->with(['subjects'=>$getAllSubjects]);
     }
 
     public function getSubjects(Request $request)
@@ -39,9 +41,9 @@ class SubjectsController extends Controller
     public function editSubject(Request $request)
     {
       $editSubjectById = DB::table('subject')->where('sub_id',$request->input('sub_id'))->update(['subject_name'=>$request->input('subject_name')]);
-
+      $getAllSubjects = DB::table('subject')->get();
       if($editSubjectById){
-        return response()->json([ 'result' => 'success']);
+        return response()->json([ 'result' => 'success', 'data'=>$getAllSubjects]);
 
       }else{
         return response()->json([ 'result' => 'error']);
@@ -51,9 +53,9 @@ class SubjectsController extends Controller
     public function deleteSubject(Request $request)
     {
       $deleteSubject = DB::table('subject')->where('sub_id', $request->input('sub_id'))->delete();
-
+      $getAllSubjects = DB::table('subject')->get();
       if($deleteSubject){
-        return response()->json([ 'result' => 'success']);
+        return response()->json([ 'result' => 'success','data'=>$getAllSubjects]);
       }
       else{
         return response()->json([ 'result' => 'error']);
@@ -63,8 +65,9 @@ class SubjectsController extends Controller
     public function addSubjects(Request $request)
     {
       $addSubject = DB::table('subject')->insert(['subject_name'=>$request->input('subject_name')]);
+      $getAllSubjects = DB::table('subject')->get();
       if($addSubject){
-        return response()->json([ 'result' => 'success']);
+        return response()->json([ 'result' => 'success','data'=>$getAllSubjects]);
       }else{
         return response()->json([ 'result' => 'error']);
       }
