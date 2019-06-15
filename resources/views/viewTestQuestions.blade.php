@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="bootstrap-data-table-export" class="table table-responsive table-striped table-bordered">
+                                <table id="bootstrap-data-table-export"   class="table table-responsive table-striped table-bordered">
                                     <thead>
                                         <tr>
                                         	<th>S.No</th>
@@ -428,11 +428,11 @@
         }
 
         $(document).on('click','.edit', function(){
-            var q_id = $(this).attr("id");
+            var test_qid = $(this).attr("id");
             $.ajax({
                 url: 'getTestQuestion',
                 type: 'GET',
-                data: {'q_id': q_id},
+                data: {'test_qid': test_qid},
                 dataType: 'JSON',
                 success: function(data){
                     console.log(data);
@@ -442,7 +442,7 @@
                     $('#Opt3').val(data.data['0'].option3);
                     $('#Opt4').val(data.data['0'].option4);
 
-                    $(".updateQuestion").attr("id", data.data['0'].q_id);
+                    $(".updateQuestion").attr("id", data.data['0'].test_qid);
                     $('#editQuestionModal').modal('show');
 
                     var question='';
@@ -498,7 +498,7 @@
                         $.ajax({
                             url: 'updateTestQuestion',
                             type: 'POST',
-                            data: { 'q_id' : q_id1, 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'test' : window.test},
+                            data: { 'test_qid' : q_id1, 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'test' : window.test},
                             dataType: 'JSON',
                             success : function(data) {
                                 console.log(data);
@@ -532,12 +532,12 @@
             var confirmation = confirm('Are you sure !');
             if(confirmation == true){
 
-                var q_id = $(this).attr("id");
+                var test_qid = $(this).attr("id");
 
                 $.ajax({
                     url: 'deleteTestQuestion',
                     type: 'POST',
-                    data: {'q_id': q_id},
+                    data: {'test_qid': test_qid},
                     dataType: 'JSON',
                     success: function(data){
                         if(data.result === 'success')

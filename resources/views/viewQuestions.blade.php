@@ -32,24 +32,24 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="bootstrap-data-table-export" class="table table-responsive table-striped table-bordered">
+                                <table id="bootstrap-data-table-export" 	class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                        	<th>S.No</th>
-                                            <th>Question</th>
-                                            <th>Option 1</th>
-                                            <th>Option 2</th>
-                                            <th>Option 3</th>
-                                            <th>Option 4</th>
-                                            <th>Answer</th>
-                                            <th>Subject</th>
-                                            <th>Chapter</th>
-                                            <th>Sheet</th>
-                                            <th>Update/Delete</th>
+                                        	<th class="block">S.No</th>
+                                            <th class="block">Question</th>
+                                            <th class="block">Option 1</th>
+                                            <th class="block">Option 2</th>
+                                            <th class="block">Option 3</th>
+                                            <th class="block">Option 4</th>
+                                            <th class="block">Answer</th>
+                                            <th class="block">Subject</th>
+                                            <th class="block">Chapter</th>
+                                            <th class="block">Sheet</th>
+                                            <th class="block">Update/Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                         @foreach($questions as $question)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
@@ -75,7 +75,7 @@
                                             </td>
                                         </tr>
                                         @endforeach
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -108,7 +108,7 @@
                             <small class="form-text text-muted"></small>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-6">                            
+                            <div class="col-md-6">
                                 <label class=" form-control-label">Option 1</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -129,7 +129,7 @@
                                 <small class="form-text text-muted"></small>
                             </div>
 
-                            <div class="col-md-6">                            
+                            <div class="col-md-6">
                                 <label class=" form-control-label">Option 3</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -236,7 +236,7 @@
                             <small class="form-text text-muted"></small>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-6">                            
+                            <div class="col-md-6">
                                 <label class=" form-control-label">Option 1</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -257,7 +257,7 @@
                                 <small class="form-text text-muted"></small>
                             </div>
 
-                            <div class="col-md-6">                            
+                            <div class="col-md-6">
                                 <label class=" form-control-label">Option 3</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -340,14 +340,14 @@
 </div>
 <!--Edit Chapter Modal End -->
 @endsection
-	
-            
-        
+
+
+
 
 
 @section('jquery')
-    
-	
+
+
     <script type="text/javascript">
         // $('#addQuestion').on('click', function() {
         //     $('#addQuestionModal').modal('show');
@@ -376,7 +376,7 @@
                 window.sheet = this.value;
                 //console.log(this.value);
             });
-            
+
             $('#O1').on('click',function() {
                 window.ans = $('#Option1').val();
             });
@@ -418,7 +418,7 @@
                         }
                         else if(data.result === 'error')
                         {
-                            
+
                             $('#closeAddQuestionModal').click();
                         }
                     }
@@ -426,7 +426,7 @@
             });
 
         }
-        
+
         $(document).on('click','.edit', function(){
             var q_id = $(this).attr("id");
             $.ajax({
@@ -454,8 +454,8 @@
                     var sub_id=0;
                     var chapter_id=0;
                     var sheet='';
-                    
-                    
+
+
                     $('#O11').on('click',function() {
                         window.ans = $('#Opt1').val();
                     });
@@ -491,7 +491,7 @@
                         window.option3 = $('#Opt3').val();
                         window.option4 = $('#Opt4').val();
 
-                        
+
 
                         console.log(q_id1+'-'+window.sub_id+'-'+window.chapter_id+'-'+window.sheet);
                         console.log(window.question+'-'+window.option1+'-'+window.option2+'-'+window.option3+'-'+window.option4+window.ans);
@@ -515,20 +515,20 @@
                                 }
                                 else if(data.result === 'error')
                                 {
-                                    
+
                                     $('#closeEditQuestionModal').click();
                                 }
                             }
                         })
                 })
-            } 
+            }
         })
     })
 
 
-            
+
         $(document).on('click','.delete', function(){
-            
+
             var confirmation = confirm('Are you sure !');
             if(confirmation == true){
 
@@ -558,5 +558,5 @@
                 });
             }
         });
-    </script> 
+    </script>
 @endsection
