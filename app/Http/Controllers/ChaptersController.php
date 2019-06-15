@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use DB;
 use View;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 
@@ -12,6 +12,7 @@ class ChaptersController extends Controller
     //
     public function viewChapters(Request $request)
     {
+
       $getAllSubjects = DB::table('subject')->get();
       $getAllChapters = DB::table('chapters')->leftJoin('subject','chapters.sub_id','=','subject.sub_id')->get();
       return View::make('viewChapter')->with(['data'=>$getAllSubjects,'chapters'=>$getAllChapters]);
@@ -39,7 +40,7 @@ class ChaptersController extends Controller
     }
     public function editChapter(Request $request)
     {
-      $editChapterById = DB::table('chapters')->where('chapter_id',$request->input('chapter_id'))->update(['chapter_name'=>$request->input('chapter_name')]);
+      $editChapterById = DB::table('chapters')->where('chapter_id',$request->input('chapter_id'))->update(['chapter_name'=>$request->input('chapter_name'), 'sub_id'=>$request->input('sub_id')]);
       $getAllChapters = DB::table('chapters')->leftJoin('subject','chapters.sub_id','=','subject.sub_id')->get();
       if($editChapterById){
         return response()->json([ 'result' => 'success','data'=>$getAllChapters]);
@@ -64,15 +65,21 @@ class ChaptersController extends Controller
       Log::info('-------');
       Log::info($request);
       Log::info('-------');
-      $addChapter = DB::table('chapters')->insert([
-        'chapter_name'=>$request->input('chapter_name'),
-        'sub_id'=>$request->input('sub_id')
-      ]);
-      $getAllChapters = DB::table('chapters')->leftJoin('subject','chapters.sub_id','=','subject.sub_id')->get();
-      if($addChapter){
-        return response()->json([ 'result' => 'success', 'data'=>$getAllChapters]);
+      $chapterExists = DB::table('chapters')->where('chapter_name', 'like', '%'.$request->chapter_name.'%')->where('sub_id', $request->sub_id)->exists();
+      if($chapterExists){
+        return response()->json([ 'result' => 'error', 'msg' => 'Subjects Already Exists']);
       }else{
-        return response()->json([ 'result' => 'error']);
+        $addChapter = DB::table('chapters')->insert([
+          'chapter_name'=>$request->input('chapter_name'),
+          'sub_id'=>$request->input('sub_id')
+        ]);
+        $getAllChapters = DB::table('chapters')->leftJoin('subject','chapters.sub_id','=','subject.sub_id')->get();
+        if($addChapter){
+          return response()->json([ 'result' => 'success', 'data'=>$getAllChapters]);
+        }else{
+          return response()->json([ 'result' => 'error']);
+        }
       }
+
     }
 }

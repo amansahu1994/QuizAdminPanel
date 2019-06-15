@@ -224,12 +224,11 @@
 		        	{
 		        		$("#editSubjectInputId").val('')
 		        		$('#closeEditSubjectModal').click()
-		        		alert('Updated Successfully.');
+		        		alert(data.msg);
 		        		/*----------*/
 								var trBody = ''
 								$.each(data.data,function(index,item){
-									console.log('data.data')
-									console.log(data.data)
+									
 									trBody = trBody + '<tr><td>'+(index+1)
 												+'<td>'+item.subject_name+'</td>'
 												+'<td>'+
@@ -254,7 +253,7 @@
 		        	{
 		        		$("#editSubjectInputId").val('')
 		        		$('#closeEditSubjectModal').click()
-		        		alert('Not Updated, Please try again.');
+		        		alert(data.msg);
 		        	}
     			}
     		});
@@ -276,7 +275,7 @@
 			    //     		tr.fadeOut(1000,function(){
 							// 	$this.remove();
 							// });
-			        		alert('Subject Deleted Successfully.');
+			        		alert(data.msg);
 									/*----------*/
 									var trBody = ''
 									$.each(data.data,function(index,item){
@@ -303,8 +302,7 @@
 			        	}
 			        	else if(data.result === 'error')
 			        	{
-
-			        		alert('Subject Not Deleted, Please try again.');
+			        		alert(data.msg);
 			        	}
 	    			}
 	    		});
@@ -314,7 +312,7 @@
 
     	function addSubject()
     	{
-				console.log('---');
+
     		if($("#addSubjectinputId").val())
     		{
     			$.ajax({
@@ -323,16 +321,16 @@
 		        data: {'subject_name': $("#addSubjectinputId").val()},
 		        dataType: 'JSON',
 		        success: function(data){
-		        	console.log(data)
-							var datas = data;
-							console.log(datas)
+
 		        	if(data.result === 'success')
 		        	{
-		        		$("#addSubjectinputId").val('')
-		        		$('#closeAddSubjectModal').click()
+
+		        		$("#addSubjectinputId").val('');
+		        		$('#closeAddSubjectModal').click();
+								alert(data.msg);
 								/*----------*/
 								var trBody = ''
-								$.each(datas.data,function(index,item){
+								$.each(data.data,function(index,item){
 									trBody = trBody + '<tr><td>'+(index+1)
 												+'<td>'+item.subject_name+'</td>'
 												+'<td>'+
@@ -354,10 +352,11 @@
 								$('#listSubjects').append(trBody);
 								/*----------*/
 		        	}
-		        	else if(datas.result === 'error')
+		        	else if(data.result === 'error')
 		        	{
-		        		$("#addSubjectinputId").val('')
-		        		$('#closeAddSubjectModal').click()
+		        		$("#addSubjectinputId").val('');
+		        		$('#closeAddSubjectModal').click();
+								alert(data.msg);
 		        	}
 
 		        }

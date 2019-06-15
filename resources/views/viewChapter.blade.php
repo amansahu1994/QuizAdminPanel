@@ -95,6 +95,7 @@
                 <div class="form-group">
                     <label for="sel1">Select Subject :</label>
                     <select class="form-control" id="selectSubject">
+                      <option value="" disabled selected>Select Subject</option>
                         @foreach($data as $subject)
                             <option value="{{$subject->sub_id}}">
                                     {{$subject->subject_name}}
@@ -142,6 +143,7 @@
                     <div class="form-group">
                     <label for="sel1">Select Subject :</label>
                     <select class="form-control" id="selectSubject1">
+                            <option value="" disabled selected>Select Subject</option>
                         @foreach($data as $subject)
                             <option value="{{$subject->sub_id}}">
                                     {{$subject->subject_name}}
@@ -349,65 +351,66 @@
 
         function addChapter()
         {
+
           console.log('---');
             var sub_id=0;
+
             $('#addChapter').modal('show');
             $('#selectSubject').on('click',function() {
                 window.sub_id = this.value;
             });
             console.log(sub_id);
-            $('.saveChapter').on('click', function() {
-                var chapter_name = $("#addChapterinputId").val();
-                console.log(chapter_name);
-                  $.ajax({
-                    url: 'addChapter',
-                    type: "POST",
-                    data: {'chapter_name': chapter_name, 'sub_id': window.sub_id},
-                    dataType: 'JSON',
-                    success: function(data){
-                        console.log(data)
-                        var datas=data;
-                        console.log(datas)
-                        if(datas.result === 'success')
-                        {
-                            $("#addChapterinputId").val('')
-                            $('#closeAddChapterModal').click()
-                            /*--------*/
-                            var trBody = ''
-                            $.each(datas.data,function(index,item){
-                                trBody = trBody + '<tr><td>'+(index+1)
-                                    +'<td>'+item.chapter_name+'</td>'
-                                    +'<td>'+item.subject_name+'</td>'
-                                    +'<td>'+
-                                    `<button type="button" id="`+item.chapter_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
-                                <i class="fa fa-edit"></i>
-                                                        Edit
-                                                      </button>
-                          <button type="button" class="btn btn-danger delete"
-                                id="`+item.chapter_id+`">
-                                  <i class="fa fa-trash-o "></i>
-                                  Delete
-                                </button>
-                              `
-                                    +'</td>'
-                                '</td></tr>'
-                            })
-                            $('#listChapters').empty();
-                            $('#listChapters').append(trBody);
-                            /*--------*/
-                        }
-                        else if(datas.result === 'error')
-                        {
-                            $("#addChapterinputId").val('')
-                            $('#closeAddChapterModal').click()
-                        }
 
-                    }
-                });
-            });
+              $('.saveChapter').on('click', function() {
+                  var chapter_name = $("#addChapterinputId").val();
+                  console.log(chapter_name);
+                    $.ajax({
+                      url: 'addChapter',
+                      type: "POST",
+                      data: {'chapter_name': chapter_name, 'sub_id': window.sub_id},
+                      dataType: 'JSON',
+                      success: function(data){
+                          console.log(data)
+                          var datas=data;
+                          console.log(datas)
+                          if(datas.result === 'success')
+                          {
 
+                              $("#addChapterinputId").val('')
+                              $('#closeAddChapterModal').click()
+                              /*--------*/
+                              var trBody = ''
+                              $.each(datas.data,function(index,item){
+                                  trBody = trBody + '<tr><td>'+(index+1)
+                                      +'<td>'+item.chapter_name+'</td>'
+                                      +'<td>'+item.subject_name+'</td>'
+                                      +'<td>'+
+                                      `<button type="button" id="`+item.chapter_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+                                  <i class="fa fa-edit"></i>
+                                                          Edit
+                                                        </button>
+                            <button type="button" class="btn btn-danger delete"
+                                  id="`+item.chapter_id+`">
+                                    <i class="fa fa-trash-o "></i>
+                                    Delete
+                                  </button>
+                                `
+                                      +'</td>'
+                                  '</td></tr>'
+                              })
+                              $('#listChapters').empty();
+                              $('#listChapters').append(trBody);
+                              /*--------*/
+                          }
+                          else if(datas.result === 'error')
+                          {
+                              $("#addChapterinputId").val('');
+                              $('#closeAddChapterModal').click();
+                          }
 
-
+                      }
+                  });
+              });
             }
 
 

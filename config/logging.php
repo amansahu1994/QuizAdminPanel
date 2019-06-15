@@ -36,8 +36,8 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily'],
-            'ignore_exceptions' => false,
+            'channels' => ['single']
+            // 'ignore_exceptions' => false,
         ],
 
         'single' => [
@@ -61,15 +61,15 @@ return [
             'level' => 'critical',
         ],
 
-        'papertrail' => [
-            'driver' => 'monolog',
-            'level' => 'debug',
-            'handler' => SyslogUdpHandler::class,
-            'handler_with' => [
-                'host' => env('PAPERTRAIL_URL'),
-                'port' => env('PAPERTRAIL_PORT'),
-            ],
-        ],
+        // 'papertrail' => [
+        //     'driver' => 'monolog',
+        //     'level' => 'debug',
+        //     'handler' => SyslogUdpHandler::class,
+        //     'handler_with' => [
+        //         'host' => env('PAPERTRAIL_URL'),
+        //         'port' => env('PAPERTRAIL_PORT'),
+        //     ],
+        // ],
 
         'stderr' => [
             'driver' => 'monolog',
