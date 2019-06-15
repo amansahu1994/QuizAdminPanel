@@ -21,9 +21,9 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-	<script src="{{url(('js/jquery.js'))}}" type="text/javascript" charset="utf-8"></script>
-	<!-- <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
-<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script src="{{url(('js/jquery.js'))}}" type="text/javascript" charset="utf-8"></script>
+		<script src="{{url(('vendors/popper.js/dist/umd/popper.min.js'))}}"></script>
+		<script type="text/javascript" src="{{url(('vendors/bootstrap/dist/js/bootstrap.min.js'))}}"></script>
     <style type="text/css" media="screen">
             @media (min-width: 768px) {
               .modal-xl {
@@ -191,9 +191,8 @@
 
 
 <!-- Script Files -->
+
 		<script src="{{url(('vendors/jquery/dist/jquery.min.js'))}}"></script>
-    <script src="{{url(('vendors/popper.js/dist/umd/popper.min.js'))}}"></script>
-    <script src="{{url(('vendors/bootstrap/dist/js/bootstrap.min.js'))}}"></script>
     <script src="{{url(('assets/js/main.js'))}}"></script>
     <script src="{{url(('vendors/datatables.net/js/jquery.dataTables.min.js'))}}"></script>
     <script src="{{url(('vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js'))}}"></script>
