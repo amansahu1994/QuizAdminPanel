@@ -169,7 +169,7 @@
 @section('jquery')
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        jQuery(document).ready(function(){
 
             $.ajax({
                 url: 'getChapters',
@@ -200,7 +200,7 @@
             });
         })
 
-        $(document).on('click','.edit', function(){
+        jQuery(document).on('click','.edit', function(){
             var chapter_id = $(this).attr("id");
 
             $.ajax({
