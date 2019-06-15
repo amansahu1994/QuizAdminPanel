@@ -314,6 +314,7 @@
 
     	function addSubject()
     	{
+				console.log('---');
     		if($("#addSubjectinputId").val())
     		{
     			$.ajax({
@@ -323,13 +324,15 @@
 		        dataType: 'JSON',
 		        success: function(data){
 		        	console.log(data)
+							var datas = data;
+							console.log(datas)
 		        	if(data.result === 'success')
 		        	{
 		        		$("#addSubjectinputId").val('')
 		        		$('#closeAddSubjectModal').click()
 								/*----------*/
 								var trBody = ''
-								$.each(data.data,function(index,item){
+								$.each(datas.data,function(index,item){
 									trBody = trBody + '<tr><td>'+(index+1)
 												+'<td>'+item.subject_name+'</td>'
 												+'<td>'+
@@ -346,11 +349,12 @@
 												+'</td>'
 												'</td></tr>'
 								})
+
 								$('#listSubjects').empty();
 								$('#listSubjects').append(trBody);
 								/*----------*/
 		        	}
-		        	else if(data.result === 'error')
+		        	else if(datas.result === 'error')
 		        	{
 		        		$("#addSubjectinputId").val('')
 		        		$('#closeAddSubjectModal').click()

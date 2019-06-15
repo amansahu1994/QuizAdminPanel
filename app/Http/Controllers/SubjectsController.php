@@ -64,6 +64,7 @@ class SubjectsController extends Controller
 
     public function addSubjects(Request $request)
     {
+      
       $addSubject = DB::table('subject')->insert(['subject_name'=>$request->input('subject_name')]);
       $getAllSubjects = DB::table('subject')->get();
       if($addSubject){

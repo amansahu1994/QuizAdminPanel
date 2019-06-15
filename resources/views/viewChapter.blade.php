@@ -349,15 +349,16 @@
 
         function addChapter()
         {
+          console.log('---');
             var sub_id=0;
             $('#addChapter').modal('show');
-            $('#selectSubject').on('change',function() {
+            $('#selectSubject').on('click',function() {
                 window.sub_id = this.value;
             });
-
+            console.log(sub_id);
             $('.saveChapter').on('click', function() {
                 var chapter_name = $("#addChapterinputId").val();
-
+                console.log(chapter_name);
                   $.ajax({
                     url: 'addChapter',
                     type: "POST",
@@ -365,13 +366,15 @@
                     dataType: 'JSON',
                     success: function(data){
                         console.log(data)
-                        if(data.result === 'success')
+                        var datas=data;
+                        console.log(datas)
+                        if(datas.result === 'success')
                         {
                             $("#addChapterinputId").val('')
                             $('#closeAddChapterModal').click()
                             /*--------*/
                             var trBody = ''
-                            $.each(data.data,function(index,item){
+                            $.each(datas.data,function(index,item){
                                 trBody = trBody + '<tr><td>'+(index+1)
                                     +'<td>'+item.chapter_name+'</td>'
                                     +'<td>'+item.subject_name+'</td>'
@@ -393,7 +396,7 @@
                             $('#listChapters').append(trBody);
                             /*--------*/
                         }
-                        else if(data.result === 'error')
+                        else if(datas.result === 'error')
                         {
                             $("#addChapterinputId").val('')
                             $('#closeAddChapterModal').click()

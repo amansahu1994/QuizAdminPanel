@@ -61,6 +61,9 @@ class ChaptersController extends Controller
     }
     public function addChapters(Request $request)
     {
+      Log::info('-------');
+      Log::info($request);
+      Log::info('-------');
       $addChapter = DB::table('chapters')->insert([
         'chapter_name'=>$request->input('chapter_name'),
         'sub_id'=>$request->input('sub_id')
