@@ -45,6 +45,23 @@
                             </tr>
                             </thead>
                             <tbody id="listChapters">
+                              @foreach($chapters as $chapter)
+                                <tr>
+                                  <td>{{$loop->iteration}}</td>
+                                  <td>{{$chapter->chapter_name}}</td>
+                                  <td>{{$chapter->subject_name}}</td>
+                                  <td>
+                                    <button type="button" id="{{$chapter->chapter_id}}" class="btn btn-warning edit" data-toggle="modal" href="">
+      		        						         <i class="fa fa-edit"></i>
+                                       Edit
+                                    </button>
+      									            <button type="button" class="btn btn-danger delete" id="{{$chapter->chapter_id}}">
+      													       <i class="fa fa-trash-o "></i>
+      													       Delete
+      												      </button>
+                                  </td>
+                                </tr>
+                              @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -195,6 +212,7 @@
                             +'</td>'
                         '</td></tr>'
                     })
+                    $('#listChapters').empty();
                     $('#listChapters').append(trBody);
                 }
             });
@@ -234,7 +252,29 @@
                                 $("#editChapterInputId").val('')
                                 $('#closeEditChapterModal').click()
                                 alert('Updated Successfully.');
-                                document.location.reload(true);
+                                /*--------*/
+                                var trBody = ''
+                                $.each(data.data,function(index,item){
+                                    trBody = trBody + '<tr><td>'+(index+1)
+                                        +'<td>'+item.chapter_name+'</td>'
+                                        +'<td>'+item.subject_name+'</td>'
+                                        +'<td>'+
+                                        `<button type="button" id="`+item.chapter_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+                                    <i class="fa fa-edit"></i>
+                                                            Edit
+                                                          </button>
+                              <button type="button" class="btn btn-danger delete"
+                                    id="`+item.chapter_id+`">
+                                      <i class="fa fa-trash-o "></i>
+                                      Delete
+                                    </button>
+                                  `
+                                        +'</td>'
+                                    '</td></tr>'
+                                })
+                                $('#listChapters').empty();
+                                $('#listChapters').append(trBody);
+                                /*--------*/
                             }
                             else if(data.result === 'error')
                             {
@@ -269,8 +309,29 @@
                             // 	$this.remove();
                             // });
                             alert('Chapter Deleted Successfully.');
-                            document.location.reload(true);
-                            //location.reload();
+                            /*--------*/
+                            var trBody = ''
+                            $.each(data.data,function(index,item){
+                                trBody = trBody + '<tr><td>'+(index+1)
+                                    +'<td>'+item.chapter_name+'</td>'
+                                    +'<td>'+item.subject_name+'</td>'
+                                    +'<td>'+
+                                    `<button type="button" id="`+item.chapter_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+                                <i class="fa fa-edit"></i>
+                                                        Edit
+                                                      </button>
+                          <button type="button" class="btn btn-danger delete"
+                                id="`+item.chapter_id+`">
+                                  <i class="fa fa-trash-o "></i>
+                                  Delete
+                                </button>
+                              `
+                                    +'</td>'
+                                '</td></tr>'
+                            })
+                            $('#listChapters').empty();
+                            $('#listChapters').append(trBody);
+                            /*--------*/
 
                         }
                         else if(data.result === 'error')
@@ -308,7 +369,29 @@
                         {
                             $("#addChapterinputId").val('')
                             $('#closeAddChapterModal').click()
-                            document.location.reload(true);
+                            /*--------*/
+                            var trBody = ''
+                            $.each(data.data,function(index,item){
+                                trBody = trBody + '<tr><td>'+(index+1)
+                                    +'<td>'+item.chapter_name+'</td>'
+                                    +'<td>'+item.subject_name+'</td>'
+                                    +'<td>'+
+                                    `<button type="button" id="`+item.chapter_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+                                <i class="fa fa-edit"></i>
+                                                        Edit
+                                                      </button>
+                          <button type="button" class="btn btn-danger delete"
+                                id="`+item.chapter_id+`">
+                                  <i class="fa fa-trash-o "></i>
+                                  Delete
+                                </button>
+                              `
+                                    +'</td>'
+                                '</td></tr>'
+                            })
+                            $('#listChapters').empty();
+                            $('#listChapters').append(trBody);
+                            /*--------*/
                         }
                         else if(data.result === 'error')
                         {

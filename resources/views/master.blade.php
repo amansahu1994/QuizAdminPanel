@@ -163,22 +163,10 @@
 
         <div class="content mt-3">
 
-
             @yield('viewSubject')
             @yield('viewChapter')
             @yield('viewQuestion')
 						@yield('viewTestQuestions')
-
-
-
-
-
-
-
-
-
-
-
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->

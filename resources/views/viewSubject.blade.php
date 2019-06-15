@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('css')
-	
+
 
 
 
@@ -44,7 +44,23 @@
                                         </tr>
                                     </thead>
                                     <tbody id="listSubjects">
-
+																			@foreach($subjects as $subject)
+																				<tr>
+																					<td>{{$loop->iteration}}</td>
+																					<td>{{$subject->subject_name}}</td>
+																					<td>
+																						<button type="button" id="{{$subject->sub_id}}" class="btn btn-warning edit" data-toggle="modal" href="">
+													        						<i class="fa fa-edit"></i>
+                                            		Edit
+                                          	</button>
+																						<button type="button" class="btn btn-danger delete"
+																							id="{{$subject->sub_id}}">
+																								<i class="fa fa-trash-o "></i>
+																								Delete
+																						</button>
+																					</td>
+																				</tr>
+																			@endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -57,13 +73,13 @@
 			<div class="modal" id="addSubject">
 		    	<div class="modal-dialog">
 		      		<div class="modal-content">
-		      
+
 				        <!-- Modal Header -->
 				        <div class="modal-header">
 				          <h4 class="modal-title">Add Subject</h4>
 				          <button type="button" class="close" data-dismiss="modal">&times;</button>
 				        </div>
-				        
+
 				        <!--Modal body -->
 				        <div class="modal-body">
 				          <div class="form-group">
@@ -75,12 +91,12 @@
                                         <small class="form-text text-muted"></small>
                           </div>
 				        </div>
-				        
+
 				        <!-- Modal footer -->
 				        <div class="modal-footer">
-				          <button type="button" class="btn btn-success" 
+				          <button type="button" class="btn btn-success"
 				          onclick="addSubject();">
-				          	<i class="fa fa-floppy-o"></i> 
+				          	<i class="fa fa-floppy-o"></i>
 				          	Save
 				          </button>
 				          <button type="button" id="closeAddSubjectModal" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -95,13 +111,13 @@
 			<div class="modal" id="editSubjectModal">
 		    	<div class="modal-dialog">
 		      		<div class="modal-content">
-		      
+
 				        <!-- Modal Header -->
 				        <div class="modal-header">
 				          <h4 class="modal-title">Edit Subject</h4>
 				          <button type="button" class="close" data-dismiss="modal">&times;</button>
 				        </div>
-				        
+
 				        <!-- Modal body -->
 				        <div class="modal-body">
 				          <div class="form-group">
@@ -113,11 +129,11 @@
                                         <small class="form-text text-muted"></small>
                           </div>
 				        </div>
-				        
+
 				        <!-- Modal footer -->
 				        <div class="modal-footer">
 				          <button type="button" class="btn btn-success updateSubject" id="">
-				          	<i class="fa fa-floppy-o"></i> 
+				          	<i class="fa fa-floppy-o"></i>
 				          	Save
 				          </button>
 				          <button type="button" id="closeEditSubjectModal" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -131,7 +147,7 @@
 <!-- Modal -->
   <div class="modal" id="successModal">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-body text-center">
@@ -141,12 +157,12 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
+
     </div>
   </div>
 
 @section('jquery')
-	
+
     <script type="text/javascript">
     	$(document).ready(function(){
 
@@ -173,6 +189,7 @@
 		        					+'</td>'
 		        					'</td></tr>'
 		        	})
+							$('#listSubjects').empty();
 		        	$('#listSubjects').append(trBody);
 
 
@@ -204,26 +221,49 @@
     			data: {'sub_id': sub_id, 'subject_name': subject_name},
     			dataType: 'JSON',
     			success: function(data){
-    				
+
     				if(data.result === 'success')
 		        	{
 		        		$("#editSubjectInputId").val('')
 		        		$('#closeEditSubjectModal').click()
 		        		alert('Updated Successfully.');
-		        		document.location.reload(true);
+		        		/*----------*/
+								var trBody = ''
+								$.each(data.data,function(index,item){
+									console.log('data.data')
+									console.log(data.data)
+									trBody = trBody + '<tr><td>'+(index+1)
+												+'<td>'+item.subject_name+'</td>'
+												+'<td>'+
+												`<button type="button" id="`+item.sub_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+													<i class="fa fa-edit"></i>
+																									Edit
+																								</button>
+										<button type="button" class="btn btn-danger delete"
+													id="`+item.sub_id+`">
+														<i class="fa fa-trash-o "></i>
+														Delete
+													</button>
+												`
+												+'</td>'
+												'</td></tr>'
+								})
+								$('#listSubjects').empty();
+								$('#listSubjects').append(trBody);
+								/*----------*/
 		        	}
 		        	else if(data.result === 'error')
 		        	{
 		        		$("#editSubjectInputId").val('')
 		        		$('#closeEditSubjectModal').click()
-		        		alert('Not Updated, Please try again.');	
+		        		alert('Not Updated, Please try again.');
 		        	}
     			}
     		});
     	})
 
     	$(document).on('click','.delete', function(){
-    		var confirmation = confirm('Are you sure !');			
+    		var confirmation = confirm('Are you sure !');
     		if(confirmation == true){
 
     			var sub_id = $(this).attr("id");
@@ -239,21 +279,41 @@
 							// 	$this.remove();
 							// });
 			        		alert('Subject Deleted Successfully.');
-			        		document.location.reload(true);		
-			        		//location.reload();
-			        		
+									/*----------*/
+									var trBody = ''
+									$.each(data.data,function(index,item){
+										trBody = trBody + '<tr><td>'+(index+1)
+													+'<td>'+item.subject_name+'</td>'
+													+'<td>'+
+													`<button type="button" id="`+item.sub_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+														<i class="fa fa-edit"></i>
+																										Edit
+																									</button>
+											<button type="button" class="btn btn-danger delete"
+														id="`+item.sub_id+`">
+															<i class="fa fa-trash-o "></i>
+															Delete
+														</button>
+													`
+													+'</td>'
+													'</td></tr>'
+									})
+									$('#listSubjects').empty();
+									$('#listSubjects').append(trBody);
+									/*----------*/
+
 			        	}
 			        	else if(data.result === 'error')
 			        	{
-			        		
-			        		alert('Subject Not Deleted, Please try again.');	
+
+			        		alert('Subject Not Deleted, Please try again.');
 			        	}
 	    			}
 	    		});
     		}
-    		
+
     	})
-		
+
     	function addSubject()
     	{
     		if($("#addSubjectinputId").val())
@@ -269,14 +329,35 @@
 		        	{
 		        		$("#addSubjectinputId").val('')
 		        		$('#closeAddSubjectModal').click()
-		        		document.location.reload(true);
+								/*----------*/
+								var trBody = ''
+								$.each(data.data,function(index,item){
+									trBody = trBody + '<tr><td>'+(index+1)
+												+'<td>'+item.subject_name+'</td>'
+												+'<td>'+
+												`<button type="button" id="`+item.sub_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+													<i class="fa fa-edit"></i>
+																									Edit
+																								</button>
+										<button type="button" class="btn btn-danger delete"
+													id="`+item.sub_id+`">
+														<i class="fa fa-trash-o "></i>
+														Delete
+													</button>
+												`
+												+'</td>'
+												'</td></tr>'
+								})
+								$('#listSubjects').empty();
+								$('#listSubjects').append(trBody);
+								/*----------*/
 		        	}
 		        	else if(data.result === 'error')
 		        	{
 		        		$("#addSubjectinputId").val('')
 		        		$('#closeAddSubjectModal').click()
 		        	}
-		        	
+
 		        }
     		});
     		}
@@ -289,7 +370,7 @@
 		   //      url: 'editsubject',
 		   //      type: "POST",
 		   //      data: {
-		   //      	'new_subject_name': $("#editSubjectinputId").val(), 
+		   //      	'new_subject_name': $("#editSubjectinputId").val(),
 		   //      	'old_subject_name':document.cookie.split('=')[1]
 		   //  	},
 		   //      dataType: 'JSON',
@@ -323,12 +404,12 @@
 		   //      		trBody = trBody + '<tr><td>'+(index+1)
 		   //      					+'<td>'+item.subject_name+'</td>'
 		   //      					+'<td>'+
-		   //      					`<button type="button" class="btn btn-warning"                                            	onclick="setOldSubjectValue( '`+ item.subject_name+`' );"                                            		data-toggle="modal" data-target="#editSubject" href="">                                        		<i class="fa fa-edit"></i>  
+		   //      					`<button type="button" class="btn btn-warning"                                            	onclick="setOldSubjectValue( '`+ item.subject_name+`' );"                                            		data-toggle="modal" data-target="#editSubject" href="">                                        		<i class="fa fa-edit"></i>
      //                                        		Edit
      //                                        	</button>
-					// 							<button type="button" class="btn btn-danger" 
+					// 							<button type="button" class="btn btn-danger"
 					// 							onclick="deleteSubject('`+ item.subject_name+`' );">
-					// 								<i class="fa fa-trash-o "></i>  
+					// 								<i class="fa fa-trash-o "></i>
 					// 								Delete
 					// 							</button>
 		   //      					`
