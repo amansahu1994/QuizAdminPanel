@@ -415,6 +415,8 @@
                             $('#Option4').val('');
                             $('#closeAddQuestionModal').click();
                             document.location.reload(true);
+
+														//$( "#bootstrap-data-table-export" ).DataTable().draw();
                         }
                         else if(data.result === 'error')
                         {
@@ -484,7 +486,7 @@
 
                     $('.updateQuestion').on('click', function(){
 
-                        var q_id1 = $('.updateQuestion').attr("id");
+                        var test_qid1 = $('.updateQuestion').attr("id");
                         window.question = $('#Quest').val();
                         window.option1 = $('#Opt1').val();
                         window.option2 = $('#Opt2').val();
@@ -493,12 +495,12 @@
 
 
 
-                        console.log(q_id1+'-'+window.sub_id+'-'+window.chapter_id+'-'+window.test);
+                        console.log(test_qid1+'-'+window.sub_id+'-'+window.chapter_id+'-'+window.test);
                         console.log(window.question+'-'+window.option1+'-'+window.option2+'-'+window.option3+'-'+window.option4+window.ans);
                         $.ajax({
                             url: 'updateTestQuestion',
                             type: 'POST',
-                            data: { 'test_qid' : q_id1, 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'test' : window.test},
+                            data: { 'test_qid' : test_qid1, 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'test' : window.test},
                             dataType: 'JSON',
                             success : function(data) {
                                 console.log(data);
