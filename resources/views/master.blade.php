@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="{{url(('vendors/font-awesome/css/font-awesome.min.css'))}}">
     <link rel="stylesheet" href="{{url(('vendors/themify-icons/css/themify-icons.css'))}}">
     <link rel="stylesheet" href="{{url(('vendors/flag-icon-css/css/flag-icon.min.css'))}}">
-    <!-- <link rel="stylesheet" href="{{url(('vendors/selectFX/css/cs-skin-elastic.css'))}}">
+    <link rel="stylesheet" href="{{url(('vendors/selectFX/css/cs-skin-elastic.css'))}}">
     <link rel="stylesheet" href="{{url(('vendors/jqvmap/dist/jqvmap.min.css'))}}">
     <link rel="stylesheet" href="{{url(('vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'))}}">
-    <link rel="stylesheet" href="{{url(('vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css'))}}"> -->
+    <link rel="stylesheet" href="{{url(('vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css'))}}">
 
     <link rel="stylesheet" href="{{url(('assets/css/style.css'))}}">
 
@@ -95,7 +95,7 @@
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="/" target="_self">Font Awesome</a></li>
                             <li><i class="menu-icon ti-themify-logo"></i><a href="/" target="_self">Themefy Icons</a></li>
                         </ul>
-                    </li>                
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -114,9 +114,9 @@
 
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                    <div class="header-left">               
+                    <div class="header-left">
                         <div class="dropdown for-message">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -162,27 +162,28 @@
 
         <div class="content mt-3">
 
-            
+
             @yield('viewSubject')
             @yield('viewChapter')
             @yield('viewQuestion')
-
-            
-
-            
-                        
-
-                    
-            
+						@yield('viewTestQuestions')
 
 
-            
+
+
+
+
+
+
+
+
+
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
-	
+
 
 
 
@@ -192,26 +193,26 @@
 	<script src="{{url(('vendors/jquery/dist/jquery.min.js'))}}"></script>
     <script src="{{url(('vendors/popper.js/dist/umd/popper.min.js'))}}"></script>
     <script src="{{url(('vendors/bootstrap/dist/js/bootstrap.min.js'))}}"></script>
-    <!-- <script src="{{url(('assets/js/main.js'))}}"></script> -->
-    <!-- <script src="{{url(('vendors/datatables.net/js/jquery.dataTables.min.js'))}}"></script>
+    <script src="{{url(('assets/js/main.js'))}}"></script>
+    <script src="{{url(('vendors/datatables.net/js/jquery.dataTables.min.js'))}}"></script>
     <script src="{{url(('vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js'))}}"></script>
     <script src="{{url(('vendors/datatables.net-buttons/js/dataTables.buttons.min.js'))}}"></script>
     <script src="{{url(('vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'))}}"></script>
-    <script src="{{url(('vendors/jszip/dist/jszip.min.js'))}}"></script>
+    <!-- <script src="{{url(('vendors/jszip/dist/jszip.min.js'))}}"></script>
     <script src="{{url(('vendors/pdfmake/build/pdfmake.min.js'))}}"></script>
-    <script src="{{url(('vendors/pdfmake/build/vfs_fonts.js'))}}"></script>
+    <script src="{{url(('vendors/pdfmake/build/vfs_fonts.js'))}}"></script> -->
     <script src="{{url(('vendors/datatables.net-buttons/js/buttons.html5.min.js'))}}"></script>
     <script src="{{url(('vendors/datatables.net-buttons/js/buttons.print.min.js'))}}"></script>
     <script src="{{url(('vendors/datatables.net-buttons/js/buttons.colVis.min.js'))}}"></script>
-    <script src="{{url(('assets/js/init-scripts/data-table/datatables-init.js'))}}"></script> -->
+    <script src="{{url(('assets/js/init-scripts/data-table/datatables-init.js'))}}"></script>
     @yield('jquery')
 
-    <!-- <script src="{{url(('vendors/chart.js/dist/Chart.bundle.min.js'))}}"></script> -->
-    <!-- <script src="{{url(('assets/js/dashboard.js'))}}"></script> -->
-    <!-- <script src="{{url(('assets/js/widgets.js'))}}"></script> -->
-    <!-- <script src="{{url(('vendors/jqvmap/dist/jquery.vmap.min.js'))}}"></script> -->
-    <!-- <script src="{{url(('vendors/jqvmap/examples/js/jquery.vmap.sampledata.js'))}}"></script> -->
-    <!-- <script src="{{url(('vendors/jqvmap/dist/maps/jquery.vmap.world.js'))}}"></script> -->
+    <!-- <script src="{{url(('vendors/chart.js/dist/Chart.bundle.min.js'))}}"></script>
+    <script src="{{url(('assets/js/dashboard.js'))}}"></script>
+    <script src="{{url(('assets/js/widgets.js'))}}"></script>
+    <script src="{{url(('vendors/jqvmap/dist/jquery.vmap.min.js'))}}"></script>
+    <script src="{{url(('vendors/jqvmap/examples/js/jquery.vmap.sampledata.js'))}}"></script>
+    <script src="{{url(('vendors/jqvmap/dist/maps/jquery.vmap.world.js'))}}"></script> -->
     <!-- <script>
         (function($) {
             "use strict";
@@ -232,4 +233,4 @@
     </script> -->
 <!-- Script Files -->
 </body>
-</html>	
+</html>

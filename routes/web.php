@@ -38,6 +38,12 @@ Route::get('getQuestion', 'QuestionsController@getQuestion');
 Route::post('updateQuestion', 'QuestionsController@updateQuestion');
 Route::post('deleteQuestion', 'QuestionsController@deleteQuestion');
 
+Route::get('/viewTestQuestions', 'TestQuestionsController@getSubjectAndChapters');
+Route::post('addTestQuestion', 'TestQuestionsController@addQuestion');
+Route::get('getTestQuestion', 'TestQuestionsController@getQuestion');
+Route::post('updateTestQuestion', 'TestQuestionsController@updateQuestion');
+Route::post('deleteTestQuestion', 'TestQuestionsController@deleteQuestion');
+
 
 
 
