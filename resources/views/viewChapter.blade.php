@@ -45,13 +45,6 @@
                             </tr>
                             </thead>
                             <tbody id="listChapters">
-                                <!-- @foreach($data as $chapters)
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                @endforeach -->
                             </tbody>
                         </table>
                     </div>
@@ -209,7 +202,7 @@
 
         $(document).on('click','.edit', function(){
             var chapter_id = $(this).attr("id");
-            
+
             $.ajax({
                 url: 'getChapter',
                 type: 'GET',
@@ -220,7 +213,7 @@
                     $('.updateChapter').attr('id',data.data['0'].chapter_id);
                     $('#editChapterModal').modal('show');
 
-                    
+
                     var sub_id=0;
                     $('#selectSubject1').on('change',function() {
                         window.sub_id = this.value;
@@ -252,12 +245,12 @@
                         }
                     });
                     })
-                    
+
                 }
             });
         })
 
-       
+
         $(document).on('click','.delete', function(){
             var confirmation = confirm('Are you sure !');
             if(confirmation == true){
@@ -291,7 +284,7 @@
 
         })
 
-        
+
 
         function addChapter()
         {
@@ -300,10 +293,10 @@
             $('#selectSubject').on('change',function() {
                 window.sub_id = this.value;
             });
-            
+
             $('.saveChapter').on('click', function() {
                 var chapter_name = $("#addChapterinputId").val();
-                
+
                   $.ajax({
                     url: 'addChapter',
                     type: "POST",
@@ -324,13 +317,13 @@
                         }
 
                     }
-                });  
+                });
             });
-           
-           
-                
+
+
+
             }
-        
+
 
     </script>
 @endsection
