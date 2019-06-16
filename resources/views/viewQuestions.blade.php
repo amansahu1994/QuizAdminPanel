@@ -48,7 +48,7 @@
                                             <th class="block">Update/Delete</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id='listQuestions'>
 
                                         @foreach($questions as $question)
                                         <tr>
@@ -153,6 +153,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectSubject1">
+																				<option value="" selected disabled>Select Subject</option>
                                         @foreach($subjects as $subject)
                                             <option value="{{$subject->sub_id}}">
                                                     {{$subject->subject_name}}
@@ -168,6 +169,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectChapter1">
+																				<option value="" selected disabled>Select Chapter</option>
                                         @foreach($chapters as $chapter)
                                             <option value="{{$chapter->chapter_id}}">
                                                     {{$chapter->chapter_name}}
@@ -183,6 +185,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectSheet1">
+																				<option value="" selected disabled>Select Sheet</option>
                                         <option value="Sheet-1">Sheet-1</option>
                                         <option value="Sheet-2">Sheet-2</option>
                                         <option value="Sheet-3">Sheet-3</option>
@@ -281,6 +284,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectSubject2">
+																			<option value="" selected disabled>Select Subject</option>
                                         @foreach($subjects as $subject)
                                             <option value="{{$subject->sub_id}}">
                                                     {{$subject->subject_name}}
@@ -296,6 +300,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectChapter2">
+																			<option value="" selected disabled>Select Chapter</option>
                                         @foreach($chapters as $chapter)
                                             <option value="{{$chapter->chapter_id}}">
                                                     {{$chapter->chapter_name}}
@@ -311,7 +316,8 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectSheet2">
-                                        <option value="Sheet-1">Sheet-1</option>
+																				<option value="" selected disabled>Select Sheet</option>
+																				<option value="Sheet-1">Sheet-1</option>
                                         <option value="Sheet-2">Sheet-2</option>
                                         <option value="Sheet-3">Sheet-3</option>
                                         <option value="Sheet-4">Sheet-4</option>
@@ -352,6 +358,43 @@
         // $('#addQuestion').on('click', function() {
         //     $('#addQuestionModal').modal('show');
         // });
+
+				$.ajax({
+					url : 'getQuestions',
+					type : 'GET',
+					success : function(data){
+						//console.log(data);
+						var trBody = '';
+
+						$.each(data.data,function(index,item){
+							trBody = trBody + '<tr><td>'+(index+1)
+										+'<td>'+item.question+'</td>'
+										+'<td>'+item.option1+'</td>'
+										+'<td>'+item.option2+'</td>'
+										+'<td>'+item.option3+'</td>'
+										+'<td>'+item.option4+'</td>'
+										+'<td>'+item.answer+'</td>'
+										+'<td>'+item.subject_name+'</td>'
+										+'<td>'+item.chapter_name+'</td>'
+										+'<td>'+item.sheet+'</td>'
+										+'<td>'+
+										`<button type="button" id="`+item.q_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+											<i class="fa fa-edit"></i>
+																							Edit
+																						</button>
+								<button type="button" class="btn btn-danger delete"
+											id="`+item.q_id+`">
+												<i class="fa fa-trash-o "></i>
+												Delete
+											</button>
+										`
+										+'</td>'
+										'</td></tr>'
+						})
+						$('#listQuestions').empty();
+						$('#listQuestions').append(trBody);
+					}
+				})
         function addQuestion()
         {
             $('#addQuestion').modal('show');
@@ -405,7 +448,7 @@
                     data: { 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'sheet' : window.sheet},
                     dataType: 'JSON',
                     success : function(data) {
-                        console.log(data);
+                        // console.log(data);
                         if(data.result === 'success')
                         {
                             $('#Question').val('');
@@ -414,12 +457,44 @@
                             $('#Option3').val('');
                             $('#Option4').val('');
                             $('#closeAddQuestionModal').click();
-                            document.location.reload(true);
+
+														var trBody = '';
+
+														$.each(data.data,function(index,item){
+															trBody = trBody + '<tr><td>'+(index+1)
+																		+'<td>'+item.question+'</td>'
+																		+'<td>'+item.option1+'</td>'
+																		+'<td>'+item.option2+'</td>'
+																		+'<td>'+item.option3+'</td>'
+																		+'<td>'+item.option4+'</td>'
+																		+'<td>'+item.answer+'</td>'
+																		+'<td>'+item.subject_name+'</td>'
+																		+'<td>'+item.chapter_name+'</td>'
+																		+'<td>'+item.sheet+'</td>'
+																		+'<td>'+
+																		`<button type="button" id="`+item.q_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+																			<i class="fa fa-edit"></i>
+																															Edit
+																														</button>
+																<button type="button" class="btn btn-danger delete"
+																			id="`+item.q_id+`">
+																				<i class="fa fa-trash-o "></i>
+																				Delete
+																			</button>
+																		`
+																		+'</td>'
+																		'</td></tr>'
+														})
+														$('#listQuestions').empty();
+														$('#listQuestions').append(trBody);
+														alert(data.msg);
+
                         }
                         else if(data.result === 'error')
                         {
 
                             $('#closeAddQuestionModal').click();
+														alert(data.msg);
                         }
                     }
                 });
@@ -435,7 +510,7 @@
                 data: {'q_id': q_id},
                 dataType: 'JSON',
                 success: function(data){
-                    console.log(data);
+                    // console.log(data);
                     $('#Quest').val(data.data['0'].question);
                     $('#Opt1').val(data.data['0'].option1);
                     $('#Opt2').val(data.data['0'].option2);
@@ -493,15 +568,15 @@
 
 
 
-                        console.log(q_id1+'-'+window.sub_id+'-'+window.chapter_id+'-'+window.sheet);
-                        console.log(window.question+'-'+window.option1+'-'+window.option2+'-'+window.option3+'-'+window.option4+window.ans);
+                        // console.log(q_id1+'-'+window.sub_id+'-'+window.chapter_id+'-'+window.sheet);
+                        // console.log(window.question+'-'+window.option1+'-'+window.option2+'-'+window.option3+'-'+window.option4+window.ans);
                         $.ajax({
                             url: 'updateQuestion',
                             type: 'POST',
                             data: { 'q_id' : q_id1, 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'sheet' : window.sheet},
                             dataType: 'JSON',
                             success : function(data) {
-                                console.log(data);
+                                // console.log(data);
                                 if(data.result === 'success')
                                 {
                                     $('#Quest').val('');
@@ -510,13 +585,44 @@
                                     $('#Opt3').val('');
                                     $('#Opt4').val('');
                                     $('#closeEditQuestionModal').click();
+
+																		var trBody = '';
+
+																		$.each(data.data,function(index,item){
+																			trBody = trBody + '<tr><td>'+(index+1)
+																						+'<td>'+item.question+'</td>'
+																						+'<td>'+item.option1+'</td>'
+																						+'<td>'+item.option2+'</td>'
+																						+'<td>'+item.option3+'</td>'
+																						+'<td>'+item.option4+'</td>'
+																						+'<td>'+item.answer+'</td>'
+																						+'<td>'+item.subject_name+'</td>'
+																						+'<td>'+item.chapter_name+'</td>'
+																						+'<td>'+item.sheet+'</td>'
+																						+'<td>'+
+																						`<button type="button" id="`+item.q_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+																							<i class="fa fa-edit"></i>
+																																			Edit
+																																		</button>
+																				<button type="button" class="btn btn-danger delete"
+																							id="`+item.q_id+`">
+																								<i class="fa fa-trash-o "></i>
+																								Delete
+																							</button>
+																						`
+																						+'</td>'
+																						'</td></tr>'
+																		})
+																		$('#listQuestions').empty();
+																		$('#listQuestions').append(trBody);
                                     alert(data.msg);
-                                    document.location.reload(true);
+
                                 }
                                 else if(data.result === 'error')
                                 {
 
                                     $('#closeEditQuestionModal').click();
+																		alert(data.msg)
                                 }
                             }
                         })
@@ -542,11 +648,37 @@
                     success: function(data){
                         if(data.result === 'success')
                         {
-                            //          tr.fadeOut(1000,function(){
-                            //  $this.remove();
-                            // });
+													var trBody = '';
+
+													$.each(data.data,function(index,item){
+														trBody = trBody + '<tr><td>'+(index+1)
+																	+'<td>'+item.question+'</td>'
+																	+'<td>'+item.option1+'</td>'
+																	+'<td>'+item.option2+'</td>'
+																	+'<td>'+item.option3+'</td>'
+																	+'<td>'+item.option4+'</td>'
+																	+'<td>'+item.answer+'</td>'
+																	+'<td>'+item.subject_name+'</td>'
+																	+'<td>'+item.chapter_name+'</td>'
+																	+'<td>'+item.sheet+'</td>'
+																	+'<td>'+
+																	`<button type="button" id="`+item.q_id+`" class="btn btn-warning edit" data-toggle="modal" href="">
+																		<i class="fa fa-edit"></i>
+																														Edit
+																													</button>
+															<button type="button" class="btn btn-danger delete"
+																		id="`+item.q_id+`">
+																			<i class="fa fa-trash-o "></i>
+																			Delete
+																		</button>
+																	`
+																	+'</td>'
+																	'</td></tr>'
+													})
+													$('#listQuestions').empty();
+													$('#listQuestions').append(trBody);
                             alert('Question Deleted Successfully.');
-                            document.location.reload(true);
+
                             //location.reload();
 
                         }

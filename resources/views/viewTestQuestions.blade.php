@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="bootstrap-data-table-export"   class="table table-responsive table-striped table-bordered">
+                                <table id="bootstrap-data-table-export"   class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                         	<th>S.No</th>
@@ -48,7 +48,7 @@
                                             <th>Update/Delete</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="listTestQuestions">
 
                                         @foreach($questions as $question)
                                         <tr>
@@ -153,6 +153,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectSubject1">
+																				<option value="" selected disabled>Select Subject</option>
                                         @foreach($subjects as $subject)
                                             <option value="{{$subject->sub_id}}">
                                                     {{$subject->subject_name}}
@@ -168,6 +169,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectChapter1">
+																			<option value="" selected disabled>Select Chapter</option>
                                         @foreach($chapters as $chapter)
                                             <option value="{{$chapter->chapter_id}}">
                                                     {{$chapter->chapter_name}}
@@ -183,6 +185,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectTest1">
+																			<option value="" selected disabled>Select Test Series</option>
                                         <option value="Test-1">Test-1</option>
                                         <option value="Test-2">Test-2</option>
                                         <option value="Test-3">Test-3</option>
@@ -281,6 +284,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectSubject2">
+																			<option value="" selected disabled>Select Subject</option>
                                         @foreach($subjects as $subject)
                                             <option value="{{$subject->sub_id}}">
                                                     {{$subject->subject_name}}
@@ -296,6 +300,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectChapter2">
+																			<option value="" selected disabled>Select Chapter</option>
                                         @foreach($chapters as $chapter)
                                             <option value="{{$chapter->chapter_id}}">
                                                     {{$chapter->chapter_name}}
@@ -311,6 +316,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select class="form-control" id="selectTest2">
+																			<option value="" selected disabled>Select Test Series</option>
                                         <option value="Test-1">Test-1</option>
                                         <option value="Test-2">Test-2</option>
                                         <option value="Test-3">Test-3</option>
@@ -352,6 +358,45 @@
         // $('#addQuestion').on('click', function() {
         //     $('#addQuestionModal').modal('show');
         // });
+
+				$.ajax({
+					url : 'getTestQuestions',
+					type : 'GET',
+					success : function(data){
+						//console.log(data);
+						var trBody = '';
+
+						$.each(data.data,function(index,item){
+							trBody = trBody + '<tr><td>'+(index+1)
+										+'<td>'+item.question+'</td>'
+										+'<td>'+item.option1+'</td>'
+										+'<td>'+item.option2+'</td>'
+										+'<td>'+item.option3+'</td>'
+										+'<td>'+item.option4+'</td>'
+										+'<td>'+item.answer+'</td>'
+										+'<td>'+item.subject_name+'</td>'
+										+'<td>'+item.chapter_name+'</td>'
+										+'<td>'+item.test+'</td>'
+										+'<td>'+
+										`<button type="button" id="`+item.test_qid+`" class="btn btn-warning edit" data-toggle="modal" href="">
+											<i class="fa fa-edit"></i>
+																							Edit
+																						</button>
+								<button type="button" class="btn btn-danger delete"
+											id="`+item.test_qid+`">
+												<i class="fa fa-trash-o "></i>
+												Delete
+											</button>
+										`
+										+'</td>'
+										'</td></tr>'
+						})
+						$('#listTestQuestions').empty();
+						$('#listTestQuestions').append(trBody);
+
+					}
+				})
+
         function addQuestion()
         {
             $('#addQuestion').modal('show');
@@ -405,7 +450,7 @@
                     data: { 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'test' : window.test},
                     dataType: 'JSON',
                     success : function(data) {
-                        console.log(data);
+                        //console.log(data);
                         if(data.result === 'success')
                         {
                             $('#Question').val('');
@@ -414,14 +459,44 @@
                             $('#Option3').val('');
                             $('#Option4').val('');
                             $('#closeAddQuestionModal').click();
-                            document.location.reload(true);
 
+														var trBody = '';
+
+														$.each(data.data,function(index,item){
+															trBody = trBody + '<tr><td>'+(index+1)
+																		+'<td>'+item.question+'</td>'
+																		+'<td>'+item.option1+'</td>'
+																		+'<td>'+item.option2+'</td>'
+																		+'<td>'+item.option3+'</td>'
+																		+'<td>'+item.option4+'</td>'
+																		+'<td>'+item.answer+'</td>'
+																		+'<td>'+item.subject_name+'</td>'
+																		+'<td>'+item.chapter_name+'</td>'
+																		+'<td>'+item.test+'</td>'
+																		+'<td>'+
+																		`<button type="button" id="`+item.test_qid+`" class="btn btn-warning edit" data-toggle="modal" href="">
+																			<i class="fa fa-edit"></i>
+																															Edit
+																														</button>
+																<button type="button" class="btn btn-danger delete"
+																			id="`+item.test_qid+`">
+																				<i class="fa fa-trash-o "></i>
+																				Delete
+																			</button>
+																		`
+																		+'</td>'
+																		'</td></tr>'
+														})
+														$('#listTestQuestions').empty();
+														$('#listTestQuestions').append(trBody);
+														alert(data.msg);
 														//$( "#bootstrap-data-table-export" ).DataTable().draw();
                         }
                         else if(data.result === 'error')
                         {
 
                             $('#closeAddQuestionModal').click();
+														alert(data.msg);
                         }
                     }
                 });
@@ -437,7 +512,7 @@
                 data: {'test_qid': test_qid},
                 dataType: 'JSON',
                 success: function(data){
-                    console.log(data);
+                    //console.log(data);
                     $('#Quest').val(data.data['0'].question);
                     $('#Opt1').val(data.data['0'].option1);
                     $('#Opt2').val(data.data['0'].option2);
@@ -495,15 +570,15 @@
 
 
 
-                        console.log(test_qid1+'-'+window.sub_id+'-'+window.chapter_id+'-'+window.test);
-                        console.log(window.question+'-'+window.option1+'-'+window.option2+'-'+window.option3+'-'+window.option4+window.ans);
+                        // console.log(test_qid1+'-'+window.sub_id+'-'+window.chapter_id+'-'+window.test);
+                        // console.log(window.question+'-'+window.option1+'-'+window.option2+'-'+window.option3+'-'+window.option4+window.ans);
                         $.ajax({
                             url: 'updateTestQuestion',
                             type: 'POST',
                             data: { 'test_qid' : test_qid1, 'question' : window.question, 'option1' : window.option1, 'option2' : window.option2, 'option3' : window.option3, 'option4' : window.option4,'answer' : window.ans, 'sub_id' : window.sub_id, 'chapter_id' : window.chapter_id, 'test' : window.test},
                             dataType: 'JSON',
                             success : function(data) {
-                                console.log(data);
+                                // console.log(data);
                                 if(data.result === 'success')
                                 {
                                     $('#Quest').val('');
@@ -512,13 +587,42 @@
                                     $('#Opt3').val('');
                                     $('#Opt4').val('');
                                     $('#closeEditQuestionModal').click();
-                                    alert(data.msg);
-                                    document.location.reload(true);
+																		var trBody = '';
+
+																		$.each(data.data,function(index,item){
+																			trBody = trBody + '<tr><td>'+(index+1)
+																						+'<td>'+item.question+'</td>'
+																						+'<td>'+item.option1+'</td>'
+																						+'<td>'+item.option2+'</td>'
+																						+'<td>'+item.option3+'</td>'
+																						+'<td>'+item.option4+'</td>'
+																						+'<td>'+item.answer+'</td>'
+																						+'<td>'+item.subject_name+'</td>'
+																						+'<td>'+item.chapter_name+'</td>'
+																						+'<td>'+item.test+'</td>'
+																						+'<td>'+
+																						`<button type="button" id="`+item.test_qid+`" class="btn btn-warning edit" data-toggle="modal" href="">
+																							<i class="fa fa-edit"></i>
+																																			Edit
+																																		</button>
+																				<button type="button" class="btn btn-danger delete"
+																							id="`+item.test_qid+`">
+																								<i class="fa fa-trash-o "></i>
+																								Delete
+																							</button>
+																						`
+																						+'</td>'
+																						'</td></tr>'
+																		})
+																		$('#listTestQuestions').empty();
+																		$('#listTestQuestions').append(trBody);
+																		alert(data.msg);
                                 }
                                 else if(data.result === 'error')
                                 {
 
                                     $('#closeEditQuestionModal').click();
+																		alert(data.msg);
                                 }
                             }
                         })
@@ -544,12 +648,40 @@
                     success: function(data){
                         if(data.result === 'success')
                         {
-                            //          tr.fadeOut(1000,function(){
-                            //  $this.remove();
-                            // });
+													var trBody = '';
+
+													$.each(data.data,function(index,item){
+														trBody = trBody + '<tr><td>'+(index+1)
+																	+'<td>'+item.question+'</td>'
+																	+'<td>'+item.option1+'</td>'
+																	+'<td>'+item.option2+'</td>'
+																	+'<td>'+item.option3+'</td>'
+																	+'<td>'+item.option4+'</td>'
+																	+'<td>'+item.answer+'</td>'
+																	+'<td>'+item.subject_name+'</td>'
+																	+'<td>'+item.chapter_name+'</td>'
+																	+'<td>'+item.test+'</td>'
+																	+'<td>'+
+																	`<button type="button" id="`+item.test_qid+`" class="btn btn-warning edit" data-toggle="modal" href="">
+																		<i class="fa fa-edit"></i>
+																														Edit
+																													</button>
+															<button type="button" class="btn btn-danger delete"
+																		id="`+item.test_qid+`">
+																			<i class="fa fa-trash-o "></i>
+																			Delete
+																		</button>
+																	`
+																	+'</td>'
+																	'</td></tr>'
+													})
+													$('#listTestQuestions').empty();
+													$('#listTestQuestions').append(trBody);
+
+
                             alert('Question Deleted Successfully.');
-                            document.location.reload(true);
-                            //location.reload();
+
+
 
                         }
                         else if(data.result === 'error')

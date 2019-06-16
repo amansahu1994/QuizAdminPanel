@@ -194,7 +194,7 @@
                 url: 'getChapters',
                 type: "GET",
                 success: function(data){
-                    console.log(data)
+                  //  console.log(data)
                     var trBody = ''
                     $.each(data.data,function(index,item){
                         trBody = trBody + '<tr><td>'+(index+1)
@@ -241,7 +241,7 @@
                     $('.updateChapter').on('click', function(){
                         var chapter_id = $(this).attr("id");
                         var chapter_name = $('#editChapterInputId').val();
-                        console.log(chapter_id+'-'+chapter_name+'-'+window.sub_id);
+                        //console.log(chapter_id+'-'+chapter_name+'-'+window.sub_id);
                         $.ajax({
                         url: 'editChapter',
                         type: 'POST',
@@ -352,27 +352,27 @@
         function addChapter()
         {
 
-          console.log('---');
+          //console.log('---');
             var sub_id=0;
 
             $('#addChapter').modal('show');
             $('#selectSubject').on('click',function() {
                 window.sub_id = this.value;
             });
-            console.log(sub_id);
+            //console.log(sub_id);
 
               $('.saveChapter').on('click', function() {
                   var chapter_name = $("#addChapterinputId").val();
-                  console.log(chapter_name);
+                //  console.log(chapter_name);
                     $.ajax({
                       url: 'addChapter',
                       type: "POST",
                       data: {'chapter_name': chapter_name, 'sub_id': window.sub_id},
                       dataType: 'JSON',
                       success: function(data){
-                          console.log(data)
+                        //  console.log(data)
                           var datas=data;
-                          console.log(datas)
+                        //  console.log(datas)
                           if(datas.result === 'success')
                           {
 

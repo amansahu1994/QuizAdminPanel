@@ -35,12 +35,14 @@ Route::post('editChapter','ChaptersController@editChapter');
 Route::get('/viewQuestions', 'QuestionsController@getSubjectAndChapters');
 Route::post('addQuestion', 'QuestionsController@addQuestion');
 Route::get('getQuestion', 'QuestionsController@getQuestion');
+Route::get('getQuestions', 'QuestionsController@getQuestions');
 Route::post('updateQuestion', 'QuestionsController@updateQuestion');
 Route::post('deleteQuestion', 'QuestionsController@deleteQuestion');
 
 Route::get('/viewTestQuestions', 'TestQuestionsController@getSubjectAndChapters');
 Route::post('addTestQuestion', 'TestQuestionsController@addQuestion');
 Route::get('getTestQuestion', 'TestQuestionsController@getQuestion');
+Route::get('getTestQuestions', 'TestQuestionsController@getTestQuestions');
 Route::post('updateTestQuestion', 'TestQuestionsController@updateQuestion');
 Route::post('deleteTestQuestion', 'TestQuestionsController@deleteQuestion');
 

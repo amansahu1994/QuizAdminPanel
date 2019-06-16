@@ -228,7 +228,7 @@
 		        		/*----------*/
 								var trBody = ''
 								$.each(data.data,function(index,item){
-									
+
 									trBody = trBody + '<tr><td>'+(index+1)
 												+'<td>'+item.subject_name+'</td>'
 												+'<td>'+
@@ -363,69 +363,6 @@
     		});
     		}
     	}
-    	// function editSubject()
-    	// {
-    	// 	if($("#editSubjectinputId").val())
-    	// 	{
-    	// 		$.ajax({
-		   //      url: 'editsubject',
-		   //      type: "POST",
-		   //      data: {
-		   //      	'new_subject_name': $("#editSubjectinputId").val(),
-		   //      	'old_subject_name':document.cookie.split('=')[1]
-		   //  	},
-		   //      dataType: 'JSON',
-		   //      success: function(data){
-		   //      	document.cookie="old_subject_value=''"
-		   //      	if(data.result === 'success')
-		   //      	{
-		   //      		$("#editSubjectinputId").val('')
-		   //      		$('#closeEditSubjectModal').click()
-		   //      	}
-		   //      	else if(data.result === 'error')
-		   //      	{
-		   //      		$("#editSubjectinputId").val('')
-		   //      		$('#closeEditSubjectModal').click()
-		   //      	}
-		   //      }
-    	// 	});
-    	// 	}
-    	// }
-    	// function deleteSubject(subject)
-    	// {
-    	// 	$.ajax({
-		   //      url: 'deletesubject',
-		   //      type: "POST",
-		   //      data: {'subject_name':subject},
-		   //      dataType: 'JSON',
-		   //      success: function(data){
-		   //      	$('#listSubjects').append(trBody).empty()
-		   //      	var trBody = ''
-		   //      	$.each(data.data,function(index,item){
-		   //      		trBody = trBody + '<tr><td>'+(index+1)
-		   //      					+'<td>'+item.subject_name+'</td>'
-		   //      					+'<td>'+
-		   //      					`<button type="button" class="btn btn-warning"                                            	onclick="setOldSubjectValue( '`+ item.subject_name+`' );"                                            		data-toggle="modal" data-target="#editSubject" href="">                                        		<i class="fa fa-edit"></i>
-     //                                        		Edit
-     //                                        	</button>
-					// 							<button type="button" class="btn btn-danger"
-					// 							onclick="deleteSubject('`+ item.subject_name+`' );">
-					// 								<i class="fa fa-trash-o "></i>
-					// 								Delete
-					// 							</button>
-		   //      					`
-		   //      					+'</td>'
-		   //      					'</td></tr>'
-		   //      	})
-		   //      	$('#listSubjects').append(trBody)
-		   //      }
-    	// 	});
-    	// }
-    	// function setOldSubjectValue(setOldSubjectValue)
-    	// {
-    	// 	// var Cookies = window.Cookies;
-    	// 	document.cookie="old_subject_value="+setOldSubjectValue
-    	// 	console.log()
-    	// }
+
     </script>
 @endsection
